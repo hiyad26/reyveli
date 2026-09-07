@@ -2,7 +2,12 @@
    REYVELI — APP.JS
    ========================= */
 
-const menuItems = [
+/*
+   Default menu
+   Used if no Admin menu has been created yet.
+*/
+
+const defaultMenuItems = [
   {
     id: 1,
     name: "Classic Beef Burger",
@@ -55,20 +60,69 @@ const menuItems = [
 
 
 /* =========================
+   GET MENU
+   ========================= */
+
+function getCustomerMenu() {
+
+  try {
+
+    const savedMenu =
+      JSON.parse(
+        localStorage.getItem("reyveliAdminMenu")
+      );
+
+    /*
+       If Admin Panel has a menu saved,
+       use it.
+    */
+
+    if (Array.isArray(savedMenu) && savedMenu.length > 0) {
+
+      return savedMenu.filter(
+        item => item.visible !== false
+      );
+
+    }
+
+  } catch (error) {
+
+    console.log("Could not load Admin menu:", error);
+
+  }
+
+  /*
+     If Admin menu doesn't exist yet,
+     use the original default menu.
+  */
+
+  return defaultMenuItems;
+}
+
+
+/* =========================
    CART
    ========================= */
 
-let cart = JSON.parse(localStorage.getItem("reyveliCart")) || [];
+let cart =
+  JSON.parse(
+    localStorage.getItem("reyveliCart")
+  ) || [];
 
 
 /* =========================
    START APP
    ========================= */
 
-document.addEventListener("DOMContentLoaded", function () {
-  renderMenu();
-  renderCart();
-});
+document.addEventListener(
+  "DOMContentLoaded",
+  function () {
+
+    renderMenu();
+    renderCart();
+
+  }
+);
 
 
 /* =========================
@@ -77,63 +131,91 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function renderMenu(category = "all") {
 
-  const grid = document.getElementById("menuGrid");
+  const grid =
+    document.getElementById("menuGrid");
 
   if (!grid) return;
+
+  const menuItems =
+    getCustomerMenu();
+
 
   const items =
     category === "all"
       ? menuItems
-      : menuItems.filter(item => item.category === category);
+      : menuItems.filter(
+          item => item.category === category
+        );
 
-  grid.innerHTML = items.map(item => {
 
-    return `
-      <article class="food-card">
+  if (items.length === 0) {
 
-        <img
-          class="food-image"
-          src="${item.image}"
-          alt="${item.name}"
-          loading="lazy"
-        >
-
-        <div class="food-info">
-
-          <div class="food-category">
-            ${item.category}
-          </div>
-
-          <h3 class="food-name">
-            ${item.name}
-          </h3>
-
-          <p class="food-description">
-            ${item.description}
-          </p>
-
-          <div class="food-bottom">
-
-            <div class="food-price">
-              MVR ${item.price}
-            </div>
-
-            <button
-              class="add-button"
-              onclick="addToCart(${item.id})"
-              aria-label="Add ${item.name} to cart"
-            >
-              +
-            </button>
-
-          </div>
-
-        </div>
-
-      </article>
+    grid.innerHTML = `
+      <div style="
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 40px 20px;
+        opacity: 0.7;
+      ">
+        <h3>No items available</h3>
+        <p>Check back soon for something delicious.</p>
+      </div>
     `;
 
-  }).join("");
+    return;
+  }
+
+
+  grid.innerHTML =
+    items.map(item => {
+
+      return `
+        <article class="food-card">
+
+          <img
+            class="food-image"
+            src="${item.image || ""}"
+            alt="${item.name}"
+            loading="lazy"
+          >
+
+          <div class="food-info">
+
+            <div class="food-category">
+              ${item.category || ""}
+            </div>
+
+            <h3 class="food-name">
+              ${item.name}
+            </h3>
+
+            <p class="food-description">
+              ${item.description || ""}
+            </p>
+
+            <div class="food-bottom">
+
+              <div class="food-price">
+                MVR ${item.price}
+              </div>
+
+              <button
+                class="add-button"
+                onclick="addToCart(${item.id})"
+                aria-label="Add ${item.name} to cart"
+              >
+                +
+              </button>
+
+            </div>
+
+          </div>
+
+        </article>
+      `;
+
+    }).join("");
+
 }
 
 
@@ -143,15 +225,24 @@ function renderMenu(category = "all") {
 
 function filterMenu(category, button) {
 
-  document.querySelectorAll(".category").forEach(btn => {
-    btn.classList.remove("active");
-  });
+  document
+    .querySelectorAll(".category")
+    .forEach(btn => {
+
+      btn.classList.remove("active");
+
+    });
+
 
   if (button) {
+
     button.classList.add("active");
+
   }
 
+
   renderMenu(category);
+
 }
 
 
@@ -161,35 +252,64 @@ function filterMenu(category, button) {
 
 function addToCart(id) {
 
-  const item = menuItems.find(product => product.id === id);
+  const menuItems =
+    getCustomerMenu();
+
+
+  const item =
+    menuItems.find(
+      product => product.id === id
+    );
+
 
   if (!item) return;
 
-  const existing = cart.find(product => product.id === id);
+
+  const existing =
+    cart.find(
+      product => product.id === id
+    );
+
 
   if (existing) {
+
     existing.quantity += 1;
+
   } else {
+
     cart.push({
       ...item,
       quantity: 1
     });
+
   }
+
 
   saveCart();
   renderCart();
 
-  const cartButton = document.querySelector(".cart-button");
+
+  const cartButton =
+    document.querySelector(
+      ".cart-button"
+    );
+
 
   if (cartButton) {
 
-    cartButton.style.transform = "scale(1.12)";
+    cartButton.style.transform =
+      "scale(1.12)";
+
 
     setTimeout(() => {
-      cartButton.style.transform = "scale(1)";
+
+      cartButton.style.transform =
+        "scale(1)";
+
     }, 150);
 
   }
+
 }
 
 
@@ -199,18 +319,31 @@ function addToCart(id) {
 
 function changeQuantity(id, amount) {
 
-  const item = cart.find(product => product.id === id);
+  const item =
+    cart.find(
+      product => product.id === id
+    );
+
 
   if (!item) return;
 
+
   item.quantity += amount;
 
+
   if (item.quantity <= 0) {
-    cart = cart.filter(product => product.id !== id);
+
+    cart =
+      cart.filter(
+        product => product.id !== id
+      );
+
   }
+
 
   saveCart();
   renderCart();
+
 }
 
 
@@ -235,37 +368,55 @@ function saveCart() {
 function renderCart() {
 
   const container =
-    document.getElementById("cartItems");
+    document.getElementById(
+      "cartItems"
+    );
 
   const count =
-    document.getElementById("cartCount");
+    document.getElementById(
+      "cartCount"
+    );
 
   const totalElement =
-    document.getElementById("cartTotal");
+    document.getElementById(
+      "cartTotal"
+    );
 
 
   if (!container) return;
 
 
-  const totalItems = cart.reduce(
-    (sum, item) => sum + item.quantity,
-    0
-  );
+  const totalItems =
+    cart.reduce(
+      (sum, item) =>
+        sum + item.quantity,
+      0
+    );
 
 
-  const totalPrice = cart.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
+  const totalPrice =
+    cart.reduce(
+      (sum, item) =>
+        sum +
+        item.price *
+        item.quantity,
+      0
+    );
 
 
   if (count) {
-    count.textContent = totalItems;
+
+    count.textContent =
+      totalItems;
+
   }
 
 
   if (totalElement) {
-    totalElement.textContent = totalPrice;
+
+    totalElement.textContent =
+      totalPrice;
+
   }
 
 
@@ -288,57 +439,61 @@ function renderCart() {
     `;
 
     return;
+
   }
 
 
-  container.innerHTML = cart.map(item => {
+  container.innerHTML =
+    cart.map(item => {
 
-    const itemTotal =
-      item.price * item.quantity;
+      const itemTotal =
+        item.price *
+        item.quantity;
 
 
-    return `
-      <div class="cart-item">
+      return `
+        <div class="cart-item">
 
-        <div class="cart-item-info">
+          <div class="cart-item-info">
 
-          <h4>
-            ${item.name}
-          </h4>
+            <h4>
+              ${item.name}
+            </h4>
 
-          <p>
-            MVR ${itemTotal}
-          </p>
+            <p>
+              MVR ${itemTotal}
+            </p>
+
+          </div>
+
+
+          <div class="quantity-controls">
+
+            <button
+              onclick="changeQuantity(${item.id}, -1)"
+            >
+              −
+            </button>
+
+
+            <strong>
+              ${item.quantity}
+            </strong>
+
+
+            <button
+              onclick="changeQuantity(${item.id}, 1)"
+            >
+              +
+            </button>
+
+          </div>
 
         </div>
+      `;
 
+    }).join("");
 
-        <div class="quantity-controls">
-
-          <button
-            onclick="changeQuantity(${item.id}, -1)"
-          >
-            −
-          </button>
-
-
-          <strong>
-            ${item.quantity}
-          </strong>
-
-
-          <button
-            onclick="changeQuantity(${item.id}, 1)"
-          >
-            +
-          </button>
-
-        </div>
-
-      </div>
-    `;
-
-  }).join("");
 }
 
 
@@ -358,7 +513,8 @@ function openCart() {
     .classList.add("show");
 
 
-  document.body.style.overflow = "hidden";
+  document.body.style.overflow =
+    "hidden";
 
 }
 
@@ -379,7 +535,8 @@ function closeCart() {
     .classList.remove("show");
 
 
-  document.body.style.overflow = "";
+  document.body.style.overflow =
+    "";
 
 }
 
@@ -391,7 +548,9 @@ function closeCart() {
 function scrollToMenu() {
 
   const menu =
-    document.getElementById("menu");
+    document.getElementById(
+      "menu"
+    );
 
 
   if (menu) {
@@ -440,14 +599,20 @@ function checkout() {
 
   if (cart.length === 0) {
 
-    alert("Your cart is empty.");
+    alert(
+      "Your cart is empty."
+    );
 
     return;
+
   }
 
 
-  /* Open the real checkout page */
+  /*
+     Open the real checkout page
+  */
 
-  window.location.href = "checkout.html";
+  window.location.href =
+    "checkout.html";
 
 }
