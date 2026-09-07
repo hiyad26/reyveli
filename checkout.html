@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>REYVELI — Checkout</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .checkout-page {
+      padding: 20px 16px 100px;
+    }
+
+    .checkout-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+
+    .back-button {
+      border: none;
+      background: #eef3ff;
+      color: #1557d6;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .checkout-top h1 {
+      color: #071a3d;
+      font-size: 23px;
+    }
+
+    .checkout-card {
+      background: white;
+      border-radius: 20px;
+      padding: 18px;
+      margin-bottom: 15px;
+      box-shadow: 0 5px 18px rgba(12, 30, 65, 0.06);
+    }
+
+    .checkout-card h2 {
+      color: #071a3d;
+      font-size: 17px;
+      margin-bottom: 15px;
+    }
+
+    .checkout-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid #e5e8ef;
+      font-size: 13px;
+    }
+
+    .checkout-item:last-child {
+      border-bottom: none;
+    }
+
+    .checkout-item-name {
+      color: #172033;
+      font-weight: bold;
+    }
+
+    .checkout-item-price {
+      color: #071a3d;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 15px;
+      margin-top: 5px;
+      border-top: 1px solid #e5e8ef;
+      color: #071a3d;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      color: #172033;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      border: 1px solid #dfe3eb;
+      background: #f9fafc;
+      border-radius: 12px;
+      padding: 13px;
+      font-size: 14px;
+      outline: none;
+      font-family: inherit;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: #1557d6;
+      background: white;
+    }
+
+    .form-group textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .place-order-btn {
+      width: 100%;
+      border: none;
+      background: #1557d6;
+      color: white;
+      padding: 16px;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+
+    .secure-note {
+      text-align: center;
+      color: #737b8c;
+      font-size: 11px;
+      margin-top: 12px;
+    }
+
+    .empty-checkout {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .empty-checkout h2 {
+      color: #071a3d;
+      margin-bottom: 8px;
+    }
+
+    .empty-checkout p {
+      color: #737b8c;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .back-menu-btn {
+      border: none;
+      background: #1557d6;
+      color: white;
+      padding: 13px 20px;
+      border-radius: 12px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="checkout-page">
+
+    <!-- TOP -->
+    <div class="checkout-top">
+
+      <button class="back-button" onclick="goBack()">
+        ←
+      </button>
+
+      <div>
+        <span class="small-label">REYVELI</span>
+        <h1>Checkout</h1>
+      </div>
+
+    </div>
+
+
+    <!-- ORDER -->
+    <section class="checkout-card">
+
+      <h2>Your order</h2>
+
+      <div id="checkoutItems"></div>
+
+      <div class="total-row">
+        <span>Total</span>
+        <span>MVR <span id="checkoutTotal">0</span></span>
+      </div>
+
+    </section>
+
+
+    <!-- CUSTOMER DETAILS -->
+    <section class="checkout-card">
+
+      <h2>Delivery details</h2>
+
+      <div class="form-group">
+
+        <label for="customerName">
+          Full name
+        </label>
+
+        <input
+          type="text"
+          id="customerName"
+          placeholder="Enter your name"
+          required
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="customerPhone">
+          Phone number
+        </label>
+
+        <input
+          type="tel"
+          id="customerPhone"
+          placeholder="Enter your phone number"
+          required
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="deliveryLocation">
+          Delivery location
+        </label>
+
+        <input
+          type="text"
+          id="deliveryLocation"
+          placeholder="House / area / location"
+          required
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="paymentMethod">
+          Payment method
+        </label>
+
+        <select id="paymentMethod">
+
+          <option value="cash">
+            Cash on delivery
+          </option>
+
+          <option value="transfer">
+            Bank / online transfer
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="orderNotes">
+          Order notes
+        </label>
+
+        <textarea
+          id="orderNotes"
+          placeholder="Anything we should know?">
+        </textarea>
+
+      </div>
+
+    </section>
+
+
+    <!-- PLACE ORDER -->
+
+    <section class="checkout-card">
+
+      <button
+        class="place-order-btn"
+        onclick="placeOrder()"
+      >
+        Place order →
+      </button>
+
+      <p class="secure-note">
+        🔒 Your order details are only used to process your order.
+      </p>
+
+    </section>
+
+  </main>
+
+
+  <script>
+
+    const checkoutCart =
+      JSON.parse(localStorage.getItem("reyveliCart")) || [];
+
+
+    function displayCheckout() {
+
+      const container =
+        document.getElementById("checkoutItems");
+
+      const totalElement =
+        document.getElementById("checkoutTotal");
+
+
+      if (checkoutCart.length === 0) {
+
+        container.innerHTML = `
+          <div class="empty-checkout">
+
+            <h2>Your cart is empty</h2>
+
+            <p>
+              Add some delicious food before checking out.
+            </p>
+
+            <button
+              class="back-menu-btn"
+              onclick="goBack()"
+            >
+              Back to menu
+            </button>
+
+          </div>
+        `;
+
+        totalElement.textContent = "0";
+
+        return;
+      }
+
+
+      let total = 0;
+
+
+      container.innerHTML =
+        checkoutCart.map(item => {
+
+          const itemTotal =
+            item.price * item.quantity;
+
+          total += itemTotal;
+
+
+          return `
+            <div class="checkout-item">
+
+              <div class="checkout-item-name">
+                ${item.name}
+                × ${item.quantity}
+              </div>
+
+              <div class="checkout-item-price">
+                MVR ${itemTotal}
+              </div>
+
+            </div>
+          `;
+
+        }).join("");
+
+
+      totalElement.textContent = total;
+
+    }
+
+
+    function goBack() {
+
+      window.location.href = "index.html";
+
+    }
+
+
+    function placeOrder() {
+
+      if (checkoutCart.length === 0) {
+
+        alert("Your cart is empty.");
+
+        return;
+
+      }
+
+
+      const name =
+        document.getElementById("customerName").value.trim();
+
+      const phone =
+        document.getElementById("customerPhone").value.trim();
+
+      const location =
+        document.getElementById("deliveryLocation").value.trim();
+
+      const payment =
+        document.getElementById("paymentMethod").value;
+
+      const notes =
+        document.getElementById("orderNotes").value.trim();
+
+
+      if (!name || !phone || !location) {
+
+        alert(
+          "Please enter your name, phone number and delivery location."
+        );
+
+        return;
+
+      }
+
+
+      const total =
+        checkoutCart.reduce(
+          (sum, item) =>
+            sum + item.price * item.quantity,
+          0
+        );
+
+
+      const order = {
+
+        id:
+          "RV-" +
+          Date.now().toString().slice(-6),
+
+        date:
+          new Date().toLocaleString(),
+
+        customer: {
+
+          name: name,
+
+          phone: phone,
+
+          location: location
+
+        },
+
+        payment: payment,
+
+        notes: notes,
+
+        items: checkoutCart,
+
+        total: total,
+
+        status: "New"
+
+      };
+
+
+      const orders =
+        JSON.parse(
+          localStorage.getItem("reyveliOrders")
+        ) || [];
+
+
+      orders.push(order);
+
+
+      localStorage.setItem(
+        "reyveliOrders",
+        JSON.stringify(orders)
+      );
+
+
+      localStorage.removeItem("reyveliCart");
+
+
+      alert(
+        "Order placed successfully! Your order number is " +
+        order.id
+      );
+
+
+      window.location.href = "index.html";
+
+    }
+
+
+    displayCheckout();
+
+  </script>
+
+</body>
+</html>
