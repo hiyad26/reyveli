@@ -179,15 +179,16 @@ function addToCart(id) {
   saveCart();
   renderCart();
 
-  // Small visual feedback
   const cartButton = document.querySelector(".cart-button");
 
   if (cartButton) {
+
     cartButton.style.transform = "scale(1.12)";
 
     setTimeout(() => {
       cartButton.style.transform = "scale(1)";
     }, 150);
+
   }
 }
 
@@ -218,7 +219,12 @@ function changeQuantity(id, amount) {
    ========================= */
 
 function saveCart() {
-  localStorage.setItem("reyveliCart", JSON.stringify(cart));
+
+  localStorage.setItem(
+    "reyveliCart",
+    JSON.stringify(cart)
+  );
+
 }
 
 
@@ -228,25 +234,35 @@ function saveCart() {
 
 function renderCart() {
 
-  const container = document.getElementById("cartItems");
-  const count = document.getElementById("cartCount");
-  const totalElement = document.getElementById("cartTotal");
+  const container =
+    document.getElementById("cartItems");
+
+  const count =
+    document.getElementById("cartCount");
+
+  const totalElement =
+    document.getElementById("cartTotal");
+
 
   if (!container) return;
+
 
   const totalItems = cart.reduce(
     (sum, item) => sum + item.quantity,
     0
   );
 
+
   const totalPrice = cart.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
 
+
   if (count) {
     count.textContent = totalItems;
   }
+
 
   if (totalElement) {
     totalElement.textContent = totalPrice;
@@ -277,7 +293,9 @@ function renderCart() {
 
   container.innerHTML = cart.map(item => {
 
-    const itemTotal = item.price * item.quantity;
+    const itemTotal =
+      item.price * item.quantity;
+
 
     return `
       <div class="cart-item">
@@ -294,6 +312,7 @@ function renderCart() {
 
         </div>
 
+
         <div class="quantity-controls">
 
           <button
@@ -302,9 +321,11 @@ function renderCart() {
             −
           </button>
 
+
           <strong>
             ${item.quantity}
           </strong>
+
 
           <button
             onclick="changeQuantity(${item.id}, 1)"
@@ -331,11 +352,14 @@ function openCart() {
     .getElementById("cartDrawer")
     .classList.add("show");
 
+
   document
     .getElementById("cartOverlay")
     .classList.add("show");
 
+
   document.body.style.overflow = "hidden";
+
 }
 
 
@@ -349,11 +373,14 @@ function closeCart() {
     .getElementById("cartDrawer")
     .classList.remove("show");
 
+
   document
     .getElementById("cartOverlay")
     .classList.remove("show");
 
+
   document.body.style.overflow = "";
+
 }
 
 
@@ -363,12 +390,16 @@ function closeCart() {
 
 function scrollToMenu() {
 
-  const menu = document.getElementById("menu");
+  const menu =
+    document.getElementById("menu");
+
 
   if (menu) {
+
     menu.scrollIntoView({
       behavior: "smooth"
     });
+
   }
 
 }
@@ -414,8 +445,9 @@ function checkout() {
     return;
   }
 
-  alert(
-    "Checkout is coming next! We'll add customer details, delivery location and order confirmation."
-  );
+
+  /* Open the real checkout page */
+
+  window.location.href = "checkout.html";
 
 }
