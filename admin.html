@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>REYVELI Admin</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    body {
+      background: #f4f7fc;
+    }
+
+    .admin-header {
+      background: #071a3d;
+      color: white;
+      padding: 22px 18px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .admin-header h1 {
+      margin: 0;
+      font-size: 25px;
+    }
+
+    .admin-header p {
+      margin: 5px 0 0;
+      opacity: .8;
+      font-size: 13px;
+    }
+
+    .admin-container {
+      padding: 18px;
+      max-width: 520px;
+      margin: auto;
+      padding-bottom: 100px;
+    }
+
+    .admin-card {
+      background: white;
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 15px;
+      box-shadow: 0 5px 18px rgba(0,0,0,.07);
+    }
+
+    .admin-card h2 {
+      margin-top: 0;
+      font-size: 18px;
+      color: #071a3d;
+    }
+
+    .admin-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .admin-button {
+      border: none;
+      border-radius: 14px;
+      padding: 18px 10px;
+      background: #1557d6;
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .admin-button.gold {
+      background: #f5c542;
+      color: #071a3d;
+    }
+
+    .admin-button.dark {
+      background: #071a3d;
+    }
+
+    .admin-button.danger {
+      background: #d93025;
+    }
+
+    .admin-section {
+      display: none;
+    }
+
+    .admin-section.active {
+      display: block;
+    }
+
+    .admin-input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 13px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      margin: 6px 0 13px;
+      font-size: 15px;
+    }
+
+    label {
+      font-size: 13px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .back-button {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 14px;
+      padding: 0;
+      margin-bottom: 12px;
+      cursor: pointer;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 20px;
+      background: #e7f7ed;
+      color: #17823b;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .admin-item {
+      border: 1px solid #eee;
+      border-radius: 12px;
+      padding: 12px;
+      margin-top: 10px;
+    }
+
+    .admin-item strong {
+      color: #071a3d;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="admin-header">
+    <button class="back-button" onclick="window.location.href='index.html'">
+      ← Back to REYVELI
+    </button>
+
+    <h1>REYVELI ADMIN</h1>
+    <p>Manage your food business</p>
+  </header>
+
+  <main class="admin-container">
+
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="admin-section active">
+
+      <div class="admin-card">
+        <h2>Dashboard</h2>
+        <span class="status">● 24 HOURS OPEN</span>
+      </div>
+
+      <div class="admin-grid">
+
+        <button class="admin-button" onclick="showSection('menu')">
+          🍔<br><br>
+          Menu
+        </button>
+
+        <button class="admin-button gold" onclick="showSection('orders')">
+          📦<br><br>
+          Orders
+        </button>
+
+        <button class="admin-button dark" onclick="showSection('offers')">
+          🏷️<br><br>
+          Offers
+        </button>
+
+        <button class="admin-button" onclick="showSection('homepage')">
+          🖼️<br><br>
+          Homepage
+        </button>
+
+        <button class="admin-button gold" onclick="showSection('delivery')">
+          🚚<br><br>
+          Delivery
+        </button>
+
+        <button class="admin-button dark" onclick="showSection('settings')">
+          ⚙️<br><br>
+          Settings
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- MENU -->
+    <section id="menu" class="admin-section">
+
+      <div class="admin-card">
+
+        <h2>🍔 Menu Management</h2>
+
+        <label>Food name</label>
+        <input id="foodName" class="admin-input" placeholder="Example: Chicken Burger">
+
+        <label>Price (MVR)</label>
+        <input id="foodPrice" class="admin-input" type="number" placeholder="85">
+
+        <label>Category</label>
+        <select id="foodCategory" class="admin-input">
+          <option value="burgers">Burgers</option>
+          <option value="meals">Meals</option>
+          <option value="snacks">Snacks</option>
+          <option value="drinks">Drinks</option>
+          <option value="desserts">Desserts</option>
+        </select>
+
+        <label>Food description</label>
+        <input id="foodDescription" class="admin-input" placeholder="Short description">
+
+        <label>Food image URL</label>
+        <input id="foodImage" class="admin-input" placeholder="Image URL">
+
+        <button class="admin-button" onclick="addFood()">
+          + Add Food
+        </button>
+
+      </div>
+
+      <div class="admin-card">
+        <h2>Current Menu</h2>
+        <div id="adminMenuList"></div>
+      </div>
+
+      <button class="admin-button dark" onclick="showSection('dashboard')">
+        ← Dashboard
+      </button>
+
+    </section>
+
+
+    <!-- ORDERS -->
+    <section id="orders" class="admin-section">
+
+      <div class="admin-card">
+
+        <h2>📦 Orders</h2>
+
+        <p>
+          Orders saved on this device:
+          <strong id="orderCount">0</strong>
+        </p>
+
+        <div id="adminOrders"></div>
+
+      </div>
+
+      <button class="admin-button dark" onclick="showSection('dashboard')">
+        ← Dashboard
+      </button>
+
+    </section>
+
+
+    <!-- OFFERS -->
+    <section id="offers" class="admin-section">
+
+      <div class="admin-card">
+
+        <h2>🏷️ Offers & Discounts</h2>
+
+        <label>Offer title</label>
+        <input class="admin-input" placeholder="Example: Midnight Special">
+
+        <label>Discount</label>
+        <input class="admin-input" placeholder="Example: 20% OFF">
+
+        <button class="admin-button">
+          Save Offer
+        </button>
+
+      </div>
+
+      <button class="admin-button dark" onclick="showSection('dashboard')">
+        ← Dashboard
+      </button>
+
+    </section>
+
+
+    <!-- HOMEPAGE -->
+    <section id="homepage" class="admin-section">
+
+      <div class="admin-card">
+
+        <h2>🖼️ Homepage</h2>
+
+        <label>Main headline</label>
+        <input class="admin-input"
+          value="Midnight cravings? We’ve got you covered.">
+
+        <label>Banner text</label>
+        <input class="admin-input"
+          value="OPEN 24 HOURS">
+
+        <label>Announcement</label>
+        <input class="admin-input"
+          placeholder="Example: Free delivery tonight!">
+
+        <button class="admin-button">
+          Save Homepage
+        </button>
+
+      </div>
+
+      <button class="admin-button dark" onclick="showSection('dashboard')">
+        ← Dashboard
+      </button>
+
+    </section>
+
+
+    <!-- DELIVERY -->
+    <section id="delivery" class="admin-section">
+
+      <div class="admin-card">
+
+        <h2>🚚 Delivery Settings</h2>
+
+        <label>Delivery fee (MVR)</label>
+        <input class="admin-input" type="number" value="20">
+
+        <label>Delivery areas</label>
+        <input class="admin-input"
+          placeholder="Example: Velidhoo">
+
+        <label>Minimum order (MVR)</label>
+        <input class="admin-input" type="number" value="0">
+
+        <button class="admin-button">
+          Save Delivery Settings
+        </button>
+
+      </div>
+
+      <button class="admin-button dark" onclick="showSection('dashboard')">
+        ← Dashboard
+      </button>
+
+    </section>
+
+
+    <!-- SETTINGS -->
+    <section id="settings" class="admin-section">
+
+      <div class="admin-card">
+
+        <h2>⚙️ Business Settings</h2>
+
+        <label>Business name</label>
+        <input class="admin-input" value="REYVELI">
+
+        <label>Tagline</label>
+        <input class="admin-input" value="Your food, anytime.">
+
+        <label>Business status</label>
+
+        <select class="admin-input">
+          <option>Open</option>
+          <option>Closed</option>
+        </select>
+
+        <button class="admin-button">
+          Save Settings
+        </button>
+
+      </div>
+
+      <button class="admin-button dark" onclick="showSection('dashboard')">
+        ← Dashboard
+      </button>
+
+    </section>
+
+  </main>
+
+
+  <script>
+
+    function showSection(section) {
+
+      document.querySelectorAll(".admin-section")
+        .forEach(item => item.classList.remove("active"));
+
+      document.getElementById(section)
+        .classList.add("active");
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+      if (section === "menu") {
+        renderAdminMenu();
+      }
+
+      if (section === "orders") {
+        renderAdminOrders();
+      }
+    }
+
+
+    function getMenu() {
+
+      return JSON.parse(
+        localStorage.getItem("reyveliAdminMenu")
+      ) || [];
+
+    }
+
+
+    function saveMenu(menu) {
+
+      localStorage.setItem(
+        "reyveliAdminMenu",
+        JSON.stringify(menu)
+      );
+
+    }
+
+
+    function addFood() {
+
+      const name =
+        document.getElementById("foodName").value.trim();
+
+      const price =
+        Number(document.getElementById("foodPrice").value);
+
+      const category =
+        document.getElementById("foodCategory").value;
+
+      const description =
+        document.getElementById("foodDescription").value.trim();
+
+      const image =
+        document.getElementById("foodImage").value.trim();
+
+
+      if (!name || !price) {
+
+        alert("Please enter food name and price.");
+
+        return;
+
+      }
+
+
+      const menu = getMenu();
+
+
+      menu.push({
+
+        id: Date.now(),
+
+        name: name,
+
+        price: price,
+
+        category: category,
+
+        description: description,
+
+        image: image
+
+      });
+
+
+      saveMenu(menu);
+
+
+      document.getElementById("foodName").value = "";
+      document.getElementById("foodPrice").value = "";
+      document.getElementById("foodDescription").value = "";
+      document.getElementById("foodImage").value = "";
+
+
+      renderAdminMenu();
+
+      alert("Food added successfully!");
+
+    }
+
+
+    function renderAdminMenu() {
+
+      const menu = getMenu();
+
+      const container =
+        document.getElementById("adminMenuList");
+
+
+      if (menu.length === 0) {
+
+        container.innerHTML =
+          "<p>No custom foods added yet.</p>";
+
+        return;
+
+      }
+
+
+      container.innerHTML = menu.map(item => `
+
+        <div class="admin-item">
+
+          <strong>${item.name}</strong>
+
+          <br>
+
+          MVR ${item.price}
+
+          <br>
+
+          ${item.category}
+
+          <br><br>
+
+          <button
+            class="admin-button danger"
+            onclick="deleteFood(${item.id})">
+            Delete
+          </button>
+
+        </div>
+
+      `).join("");
+
+    }
+
+
+    function deleteFood(id) {
+
+      if (!confirm("Delete this food?")) return;
+
+
+      let menu = getMenu();
+
+      menu = menu.filter(item => item.id !== id);
+
+      saveMenu(menu);
+
+      renderAdminMenu();
+
+    }
+
+
+    function renderAdminOrders() {
+
+      const orders =
+        JSON.parse(
+          localStorage.getItem("reyveliOrders")
+        ) || [];
+
+
+      document.getElementById("orderCount")
+        .textContent = orders.length;
+
+
+      const container =
+        document.getElementById("adminOrders");
+
+
+      if (orders.length === 0) {
+
+        container.innerHTML =
+          "<p>No orders yet.</p>";
+
+        return;
+
+      }
+
+
+      container.innerHTML = orders.map(order => `
+
+        <div class="admin-item">
+
+          <strong>Order ${order.id}</strong>
+
+          <br><br>
+
+          Customer: ${order.customer.name}
+
+          <br>
+
+          Phone: ${order.customer.phone}
+
+          <br>
+
+          Location: ${order.customer.location}
+
+          <br><br>
+
+          Total:
+          <strong>MVR ${order.total}</strong>
+
+          <br><br>
+
+          Status:
+          <strong>${order.status}</strong>
+
+        </div>
+
+      `).join("");
+
+    }
+
+  </script>
+
+</body>
+</html>
