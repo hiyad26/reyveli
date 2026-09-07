@@ -1,5 +1,6 @@
-```html
+
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -12,6 +13,7 @@
 <body>
 
   <!-- HEADER -->
+
   <header class="topbar">
     <div class="brand">
       <div class="brand-logo">R</div>
@@ -21,154 +23,169 @@
       </div>
     </div>
 
-    <div>
-      <!-- ADMIN BUTTON -->
-      <button
-        class="admin-button"
-        onclick="window.location.href='admin.html'">
-        ⚙️ Admin
-      </button>
+```
+<div>
+  <!-- ADMIN BUTTON -->
+  <button
+    class="admin-button"
+    onclick="window.location.href='admin.html'"
+    title="Admin">
+    ⚙️
+  </button>
 
-      <button class="cart-button" onclick="openCart()">
-        🛒 <span id="cartCount">0</span>
-      </button>
-    </div>
+  <button class="cart-button" onclick="openCart()">
+    🛒 <span id="cartCount">0</span>
+  </button>
+</div>
+```
+
   </header>
 
-
   <!-- HERO -->
+
   <section class="hero">
     <div class="hero-content">
       <span class="open-badge">● OPEN 24 HOURS</span>
 
-      <h2>Midnight cravings?<br>We've got you covered.</h2>
+```
+  <h2>Midnight cravings?<br>We've got you covered.</h2>
 
-      <p>Fresh food delivered whenever you're hungry.</p>
+  <p>Fresh food delivered whenever you're hungry.</p>
 
-      <button class="primary-btn" onclick="scrollToMenu()">
-        Order now →
-      </button>
-    </div>
+  <button class="primary-btn" onclick="scrollToMenu()">
+    Order now →
+  </button>
+</div>
+```
+
   </section>
 
-
   <!-- CATEGORIES -->
+
   <section class="categories-section">
     <div class="section-title">
       <h2>What are you craving?</h2>
     </div>
 
-    <div class="categories">
-      <button class="category active" onclick="filterMenu('all', this)">
-        All
-      </button>
+```
+<div class="categories">
+  <button class="category active" onclick="filterMenu('all', this)">
+    All
+  </button>
 
-      <button class="category" onclick="filterMenu('burgers', this)">
-        🍔 Burgers
-      </button>
+  <button class="category" onclick="filterMenu('burgers', this)">
+    🍔 Burgers
+  </button>
 
-      <button class="category" onclick="filterMenu('meals', this)">
-        🍗 Meals
-      </button>
+  <button class="category" onclick="filterMenu('meals', this)">
+    🍗 Meals
+  </button>
 
-      <button class="category" onclick="filterMenu('snacks', this)">
-        🍟 Snacks
-      </button>
+  <button class="category" onclick="filterMenu('snacks', this)">
+    🍟 Snacks
+  </button>
 
-      <button class="category" onclick="filterMenu('drinks', this)">
-        🥤 Drinks
-      </button>
+  <button class="category" onclick="filterMenu('drinks', this)">
+    🥤 Drinks
+  </button>
 
-      <button class="category" onclick="filterMenu('desserts', this)">
-        🍰 Desserts
-      </button>
-    </div>
+  <button class="category" onclick="filterMenu('desserts', this)">
+    🍰 Desserts
+  </button>
+</div>
+```
+
   </section>
 
-
   <!-- MENU -->
+
   <main id="menu" class="menu-section">
 
-    <div class="menu-heading">
-      <div>
-        <span class="small-label">REYVELI MENU</span>
-        <h2>Popular right now</h2>
-      </div>
-    </div>
+```
+<div class="menu-heading">
+  <div>
+    <span class="small-label">REYVELI MENU</span>
+    <h2>Popular right now</h2>
+  </div>
+</div>
 
-    <div id="menuGrid" class="menu-grid"></div>
+<div id="menuGrid" class="menu-grid"></div>
+```
 
   </main>
 
-
   <!-- CART DRAWER -->
+
   <div id="cartOverlay" class="cart-overlay" onclick="closeCart()"></div>
 
   <aside id="cartDrawer" class="cart-drawer">
 
-    <div class="cart-header">
-      <div>
-        <span class="small-label">YOUR ORDER</span>
-        <h2>Cart</h2>
-      </div>
+```
+<div class="cart-header">
+  <div>
+    <span class="small-label">YOUR ORDER</span>
+    <h2>Cart</h2>
+  </div>
 
-      <button class="close-btn" onclick="closeCart()">×</button>
-    </div>
+  <button class="close-btn" onclick="closeCart()">×</button>
+</div>
 
-    <div id="cartItems" class="cart-items">
-      <div class="empty-cart">
-        <div class="empty-icon">🛒</div>
-        <h3>Your cart is empty</h3>
-        <p>Add something delicious from the menu.</p>
-      </div>
-    </div>
+<div id="cartItems" class="cart-items">
+  <div class="empty-cart">
+    <div class="empty-icon">🛒</div>
+    <h3>Your cart is empty</h3>
+    <p>Add something delicious from the menu.</p>
+  </div>
+</div>
 
-    <div class="cart-footer">
+<div class="cart-footer">
 
-      <div class="cart-total">
-        <span>Total</span>
-        <strong>MVR <span id="cartTotal">0</span></strong>
-      </div>
+  <div class="cart-total">
+    <span>Total</span>
+    <strong>MVR <span id="cartTotal">0</span></strong>
+  </div>
 
-      <button class="checkout-btn" onclick="checkout()">
-        Continue to checkout →
-      </button>
+  <button class="checkout-btn" onclick="checkout()">
+    Continue to checkout →
+  </button>
 
-    </div>
+</div>
+```
 
   </aside>
 
-
   <!-- BOTTOM NAV -->
+
   <nav class="bottom-nav">
 
-    <button class="nav-item active" onclick="goHome()">
-      <span>⌂</span>
-      <small>Home</small>
-    </button>
+```
+<button class="nav-item active" onclick="goHome()">
+  <span>⌂</span>
+  <small>Home</small>
+</button>
 
-    <button class="nav-item" onclick="scrollToMenu()">
-      <span>☰</span>
-      <small>Menu</small>
-    </button>
+<button class="nav-item" onclick="scrollToMenu()">
+  <span>☰</span>
+  <small>Menu</small>
+</button>
 
-    <button class="nav-item" onclick="openCart()">
-      <span>🛒</span>
-      <small>Cart</small>
-    </button>
+<button class="nav-item" onclick="openCart()">
+  <span>🛒</span>
+  <small>Cart</small>
+</button>
 
-    <button class="nav-item" onclick="showOrders()">
-      <span>◷</span>
-      <small>Orders</small>
-    </button>
+<button class="nav-item" onclick="showOrders()">
+  <span>◷</span>
+  <small>Orders</small>
+</button>
+```
 
   </nav>
 
-
   <!-- JAVASCRIPT -->
+
   <script src="app.js"></script>
 
 </body>
 </html>
-```
 
