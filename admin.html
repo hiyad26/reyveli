@@ -4,15 +4,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>REYVELI Admin</title>
+
   <link rel="stylesheet" href="style.css">
 
   <style>
+
     body {
       background: #f4f7fc;
     }
 
     /* PASSWORD SCREEN */
+
     .login-screen {
       min-height: 100vh;
       display: flex;
@@ -101,7 +105,9 @@
       text-decoration: none;
     }
 
+
     /* ADMIN */
+
     .admin-header {
       background: #071a3d;
       color: white;
@@ -287,376 +293,754 @@
     #adminApp {
       display: none;
     }
+
+
+    /* =========================
+       ORDERS
+       ========================= */
+
+    .orders-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .order-count {
+      color: #666;
+      font-size: 13px;
+    }
+
+    .order-card {
+      border: 1px solid #e4e7ee;
+      border-radius: 15px;
+      padding: 15px;
+      margin-top: 12px;
+      background: #fff;
+    }
+
+    .order-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .order-number {
+      color: #071a3d;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .order-date {
+      color: #777;
+      font-size: 11px;
+      margin-top: 4px;
+    }
+
+    .order-status {
+      border: none;
+      border-radius: 20px;
+      padding: 7px 9px;
+      font-size: 11px;
+      font-weight: bold;
+      cursor: pointer;
+      background: #eef3ff;
+      color: #1557d6;
+    }
+
+    .order-status.new {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .order-status.accepted {
+      background: #e7f7ed;
+      color: #17823b;
+    }
+
+    .order-status.preparing {
+      background: #e8f1ff;
+      color: #1557d6;
+    }
+
+    .order-status.delivery {
+      background: #eee8ff;
+      color: #6542c2;
+    }
+
+    .order-status.completed {
+      background: #e7f7ed;
+      color: #17823b;
+    }
+
+    .order-status.cancelled {
+      background: #fde8e7;
+      color: #d93025;
+    }
+
+    .order-info {
+      font-size: 13px;
+      color: #333;
+      line-height: 1.7;
+    }
+
+    .order-info strong {
+      color: #071a3d;
+    }
+
+    .order-items {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid #eee;
+    }
+
+    .order-items-title {
+      font-size: 12px;
+      font-weight: bold;
+      color: #071a3d;
+      margin-bottom: 7px;
+    }
+
+    .order-item-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 12px;
+      padding: 5px 0;
+    }
+
+    .order-total {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid #eee;
+      margin-top: 10px;
+      padding-top: 10px;
+      color: #071a3d;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .order-notes {
+      background: #fff9e8;
+      border-radius: 10px;
+      padding: 10px;
+      margin-top: 12px;
+      font-size: 12px;
+      color: #66520b;
+    }
+
+    .order-actions {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .order-actions select {
+      flex: 1;
+      min-width: 150px;
+      border: 1px solid #ddd;
+      border-radius: 9px;
+      padding: 9px;
+      background: white;
+      font-size: 12px;
+    }
+
+    .no-orders {
+      text-align: center;
+      padding: 35px 15px;
+      color: #777;
+      font-size: 13px;
+    }
+
   </style>
 
 </head>
 
 <body>
 
+
   <!-- PASSWORD SCREEN -->
 
   <div id="loginScreen" class="login-screen">
+
     <div class="login-card">
 
-```
-  <div class="login-logo">R</div>
+      <div class="login-logo">R</div>
 
-  <h1>REYVELI ADMIN</h1>
+      <h1>REYVELI ADMIN</h1>
 
-  <p>Enter your password to continue.</p>
+      <p>Enter your password to continue.</p>
 
-  <input
-    id="adminPassword"
-    class="login-input"
-    type="password"
-    placeholder="Admin password"
-    autocomplete="off"
-    onkeydown="if(event.key==='Enter') login()"
-  >
+      <input
+        id="adminPassword"
+        class="login-input"
+        type="password"
+        placeholder="Admin password"
+        autocomplete="off"
+        onkeydown="if(event.key==='Enter') login()"
+      >
 
-  <button class="login-button" onclick="login()">
-    🔐 Login
-  </button>
+      <button class="login-button" onclick="login()">
+        🔐 Login
+      </button>
 
-  <div id="loginError" class="login-error">
-    Incorrect password. Please try again.
-  </div>
+      <div id="loginError" class="login-error">
+        Incorrect password. Please try again.
+      </div>
 
-  <a href="index.html" class="back-to-site">
-    ← Back to REYVELI
-  </a>
+      <a href="index.html" class="back-to-site">
+        ← Back to REYVELI
+      </a>
 
-</div>
-```
+    </div>
 
   </div>
+
 
   <!-- ADMIN APP -->
 
   <div id="adminApp">
 
-```
-<header class="admin-header">
 
-  <button class="logout-button" onclick="logout()">
-    Logout
-  </button>
+    <header class="admin-header">
 
-  <button class="back-button" onclick="window.location.href='index.html'">
-    ← Back to REYVELI
-  </button>
-
-  <h1>REYVELI ADMIN</h1>
-  <p>Manage your food business</p>
-
-</header>
-
-
-<main class="admin-container">
-
-  <!-- DASHBOARD -->
-  <section id="dashboard" class="admin-section active">
-
-    <div class="admin-card">
-      <h2>Dashboard</h2>
-      <span class="status">● 24 HOURS OPEN</span>
-    </div>
-
-    <div class="admin-grid">
-
-      <button class="admin-button" onclick="showSection('menu')">
-        🍔<br><br>
-        Menu
+      <button class="logout-button" onclick="logout()">
+        Logout
       </button>
 
-      <button class="admin-button gold" onclick="showSection('orders')">
-        📦<br><br>
-        Orders
+      <button class="back-button" onclick="window.location.href='index.html'">
+        ← Back to REYVELI
       </button>
 
-      <button class="admin-button dark" onclick="showSection('offers')">
-        🏷️<br><br>
-        Offers
-      </button>
+      <h1>REYVELI ADMIN</h1>
 
-      <button class="admin-button" onclick="showSection('homepage')">
-        🖼️<br><br>
-        Homepage
-      </button>
+      <p>Manage your food business</p>
 
-      <button class="admin-button gold" onclick="showSection('delivery')">
-        🚚<br><br>
-        Delivery
-      </button>
+    </header>
 
-      <button class="admin-button dark" onclick="showSection('settings')">
-        ⚙️<br><br>
-        Settings
-      </button>
 
-    </div>
+    <main class="admin-container">
 
-  </section>
 
+      <!-- DASHBOARD -->
 
-  <!-- MENU -->
-  <section id="menu" class="admin-section">
+      <section id="dashboard" class="admin-section active">
 
-    <div class="admin-card">
+        <div class="admin-card">
 
-      <h2>🍔 Menu Management</h2>
+          <h2>Dashboard</h2>
 
-      <label>Food name</label>
-      <input id="foodName" class="admin-input" placeholder="Example: Chicken Burger">
+          <span class="status">
+            ● 24 HOURS OPEN
+          </span>
 
-      <label>Price (MVR)</label>
-      <input id="foodPrice" class="admin-input" type="number" min="0" placeholder="85">
+        </div>
 
-      <label>Category</label>
-      <select id="foodCategory" class="admin-input">
-        <option value="burgers">Burgers</option>
-        <option value="meals">Meals</option>
-        <option value="snacks">Snacks</option>
-        <option value="drinks">Drinks</option>
-        <option value="desserts">Desserts</option>
-      </select>
 
-      <label>Food description</label>
-      <input id="foodDescription" class="admin-input" placeholder="Short description">
+        <div class="admin-grid">
 
-      <label>Food image URL</label>
-      <input id="foodImage" class="admin-input" placeholder="Image URL">
+          <button
+            class="admin-button"
+            onclick="showSection('menu')"
+          >
+            🍔<br><br>
+            Menu
+          </button>
 
-      <button class="admin-button" onclick="addFood()">
-        + Add Food
-      </button>
 
-    </div>
+          <button
+            class="admin-button gold"
+            onclick="showSection('orders')"
+          >
+            📦<br><br>
+            Orders
+          </button>
 
-    <div class="admin-card">
 
-      <h2>Current Menu</h2>
+          <button
+            class="admin-button dark"
+            onclick="showSection('offers')"
+          >
+            🏷️<br><br>
+            Offers
+          </button>
 
-      <div id="adminMenuList"></div>
 
-    </div>
+          <button
+            class="admin-button"
+            onclick="showSection('homepage')"
+          >
+            🖼️<br><br>
+            Homepage
+          </button>
 
-    <button class="admin-button dark" onclick="showSection('dashboard')">
-      ← Dashboard
-    </button>
 
-  </section>
+          <button
+            class="admin-button gold"
+            onclick="showSection('delivery')"
+          >
+            🚚<br><br>
+            Delivery
+          </button>
 
 
-  <!-- ORDERS -->
-  <section id="orders" class="admin-section">
+          <button
+            class="admin-button dark"
+            onclick="showSection('settings')"
+          >
+            ⚙️<br><br>
+            Settings
+          </button>
 
-    <div class="admin-card">
+        </div>
 
-      <h2>📦 Orders</h2>
+      </section>
 
-      <p>
-        Orders saved on this device:
-        <strong id="orderCount">0</strong>
-      </p>
 
-      <div id="adminOrders"></div>
+      <!-- MENU -->
 
-    </div>
+      <section id="menu" class="admin-section">
 
-    <button class="admin-button dark" onclick="showSection('dashboard')">
-      ← Dashboard
-    </button>
+        <div class="admin-card">
 
-  </section>
+          <h2>🍔 Menu Management</h2>
 
+          <label>Food name</label>
 
-  <!-- OFFERS -->
-  <section id="offers" class="admin-section">
+          <input
+            id="foodName"
+            class="admin-input"
+            placeholder="Example: Chicken Burger"
+          >
 
-    <div class="admin-card">
 
-      <h2>🏷️ Offers & Discounts</h2>
+          <label>Price (MVR)</label>
 
-      <label>Offer title</label>
-      <input
-        id="offerTitle"
-        class="admin-input"
-        placeholder="Example: Midnight Special">
+          <input
+            id="foodPrice"
+            class="admin-input"
+            type="number"
+            min="0"
+            placeholder="85"
+          >
 
-      <label>Discount</label>
-      <input
-        id="offerDiscount"
-        class="admin-input"
-        placeholder="Example: 20% OFF">
 
-      <button class="admin-button" onclick="saveOffer()">
-        Save Offer
-      </button>
+          <label>Category</label>
 
-      <div id="savedOffer"></div>
+          <select
+            id="foodCategory"
+            class="admin-input"
+          >
 
-    </div>
+            <option value="burgers">
+              Burgers
+            </option>
 
-    <button class="admin-button dark" onclick="showSection('dashboard')">
-      ← Dashboard
-    </button>
+            <option value="meals">
+              Meals
+            </option>
 
-  </section>
+            <option value="snacks">
+              Snacks
+            </option>
 
+            <option value="drinks">
+              Drinks
+            </option>
 
-  <!-- HOMEPAGE -->
-  <section id="homepage" class="admin-section">
+            <option value="desserts">
+              Desserts
+            </option>
 
-    <div class="admin-card">
+          </select>
 
-      <h2>🖼️ Homepage</h2>
 
-      <label>Main headline</label>
-      <input
-        id="homepageHeadline"
-        class="admin-input"
-        value="Midnight cravings? We’ve got you covered.">
+          <label>Food description</label>
 
-      <label>Banner text</label>
-      <input
-        id="homepageBanner"
-        class="admin-input"
-        value="OPEN 24 HOURS">
+          <input
+            id="foodDescription"
+            class="admin-input"
+            placeholder="Short description"
+          >
 
-      <label>Announcement</label>
-      <input
-        id="homepageAnnouncement"
-        class="admin-input"
-        placeholder="Example: Free delivery tonight!">
 
-      <button class="admin-button" onclick="saveHomepage()">
-        Save Homepage
-      </button>
+          <label>Food image URL</label>
 
-    </div>
+          <input
+            id="foodImage"
+            class="admin-input"
+            placeholder="Image URL"
+          >
 
-    <button class="admin-button dark" onclick="showSection('dashboard')">
-      ← Dashboard
-    </button>
 
-  </section>
+          <button
+            class="admin-button"
+            onclick="addFood()"
+          >
+            + Add Food
+          </button>
 
+        </div>
 
-  <!-- DELIVERY -->
-  <section id="delivery" class="admin-section">
 
-    <div class="admin-card">
+        <div class="admin-card">
 
-      <h2>🚚 Delivery Settings</h2>
+          <h2>Current Menu</h2>
 
-      <label>Delivery fee (MVR)</label>
-      <input
-        id="deliveryFee"
-        class="admin-input"
-        type="number"
-        value="20">
+          <div id="adminMenuList"></div>
 
-      <label>Delivery areas</label>
-      <input
-        id="deliveryAreas"
-        class="admin-input"
-        placeholder="Example: Velidhoo">
+        </div>
 
-      <label>Minimum order (MVR)</label>
-      <input
-        id="minimumOrder"
-        class="admin-input"
-        type="number"
-        value="0">
 
-      <button class="admin-button" onclick="saveDelivery()">
-        Save Delivery Settings
-      </button>
+        <button
+          class="admin-button dark"
+          onclick="showSection('dashboard')"
+        >
+          ← Dashboard
+        </button>
 
-    </div>
+      </section>
 
-    <button class="admin-button dark" onclick="showSection('dashboard')">
-      ← Dashboard
-    </button>
 
-  </section>
+      <!-- ORDERS -->
 
+      <section id="orders" class="admin-section">
 
-  <!-- SETTINGS -->
-  <section id="settings" class="admin-section">
+        <div class="admin-card">
 
-    <div class="admin-card">
+          <div class="orders-toolbar">
 
-      <h2>⚙️ Business Settings</h2>
+            <div>
 
-      <label>Business name</label>
-      <input
-        id="businessName"
-        class="admin-input"
-        value="REYVELI">
+              <h2 style="margin-bottom:4px;">
+                📦 Orders
+              </h2>
 
-      <label>Tagline</label>
-      <input
-        id="businessTagline"
-        class="admin-input"
-        value="Your food, anytime.">
+              <div class="order-count">
+                Total orders:
+                <strong id="orderCount">0</strong>
+              </div>
 
-      <label>Business status</label>
+            </div>
 
-      <select id="businessStatus" class="admin-input">
-        <option>Open</option>
-        <option>Closed</option>
-      </select>
+            <button
+              class="admin-button small"
+              onclick="renderAdminOrders()"
+            >
+              🔄 Refresh
+            </button>
 
-      <button class="admin-button" onclick="saveSettings()">
-        Save Settings
-      </button>
+          </div>
 
-    </div>
 
-    <button class="admin-button dark" onclick="showSection('dashboard')">
-      ← Dashboard
-    </button>
+          <div id="adminOrders"></div>
 
-  </section>
+        </div>
 
-</main>
-```
+
+        <button
+          class="admin-button dark"
+          onclick="showSection('dashboard')"
+        >
+          ← Dashboard
+        </button>
+
+      </section>
+
+
+      <!-- OFFERS -->
+
+      <section id="offers" class="admin-section">
+
+        <div class="admin-card">
+
+          <h2>🏷️ Offers & Discounts</h2>
+
+          <label>Offer title</label>
+
+          <input
+            id="offerTitle"
+            class="admin-input"
+            placeholder="Example: Midnight Special"
+          >
+
+
+          <label>Discount</label>
+
+          <input
+            id="offerDiscount"
+            class="admin-input"
+            placeholder="Example: 20% OFF"
+          >
+
+
+          <button
+            class="admin-button"
+            onclick="saveOffer()"
+          >
+            Save Offer
+          </button>
+
+
+          <div id="savedOffer"></div>
+
+        </div>
+
+
+        <button
+          class="admin-button dark"
+          onclick="showSection('dashboard')"
+        >
+          ← Dashboard
+        </button>
+
+      </section>
+
+
+      <!-- HOMEPAGE -->
+
+      <section id="homepage" class="admin-section">
+
+        <div class="admin-card">
+
+          <h2>🖼️ Homepage</h2>
+
+          <label>Main headline</label>
+
+          <input
+            id="homepageHeadline"
+            class="admin-input"
+            value="Midnight cravings? We’ve got you covered."
+          >
+
+
+          <label>Banner text</label>
+
+          <input
+            id="homepageBanner"
+            class="admin-input"
+            value="OPEN 24 HOURS"
+          >
+
+
+          <label>Announcement</label>
+
+          <input
+            id="homepageAnnouncement"
+            class="admin-input"
+            placeholder="Example: Free delivery tonight!"
+          >
+
+
+          <button
+            class="admin-button"
+            onclick="saveHomepage()"
+          >
+            Save Homepage
+          </button>
+
+        </div>
+
+
+        <button
+          class="admin-button dark"
+          onclick="showSection('dashboard')"
+        >
+          ← Dashboard
+        </button>
+
+      </section>
+
+
+      <!-- DELIVERY -->
+
+      <section id="delivery" class="admin-section">
+
+        <div class="admin-card">
+
+          <h2>🚚 Delivery Settings</h2>
+
+          <label>Delivery fee (MVR)</label>
+
+          <input
+            id="deliveryFee"
+            class="admin-input"
+            type="number"
+            value="20"
+          >
+
+
+          <label>Delivery areas</label>
+
+          <input
+            id="deliveryAreas"
+            class="admin-input"
+            placeholder="Example: Velidhoo"
+          >
+
+
+          <label>Minimum order (MVR)</label>
+
+          <input
+            id="minimumOrder"
+            class="admin-input"
+            type="number"
+            value="0"
+          >
+
+
+          <button
+            class="admin-button"
+            onclick="saveDelivery()"
+          >
+            Save Delivery Settings
+          </button>
+
+        </div>
+
+
+        <button
+          class="admin-button dark"
+          onclick="showSection('dashboard')"
+        >
+          ← Dashboard
+        </button>
+
+      </section>
+
+
+      <!-- SETTINGS -->
+
+      <section id="settings" class="admin-section">
+
+        <div class="admin-card">
+
+          <h2>⚙️ Business Settings</h2>
+
+          <label>Business name</label>
+
+          <input
+            id="businessName"
+            class="admin-input"
+            value="REYVELI"
+          >
+
+
+          <label>Tagline</label>
+
+          <input
+            id="businessTagline"
+            class="admin-input"
+            value="Your food, anytime."
+          >
+
+
+          <label>Business status</label>
+
+          <select
+            id="businessStatus"
+            class="admin-input"
+          >
+
+            <option>
+              Open
+            </option>
+
+            <option>
+              Closed
+            </option>
+
+          </select>
+
+
+          <button
+            class="admin-button"
+            onclick="saveSettings()"
+          >
+            Save Settings
+          </button>
+
+        </div>
+
+
+        <button
+          class="admin-button dark"
+          onclick="showSection('dashboard')"
+        >
+          ← Dashboard
+        </button>
+
+      </section>
+
+
+    </main>
 
   </div>
 
+
   <script>
+
 
     /* =========================
        ADMIN PASSWORD
        ========================= */
 
-    const ADMIN_PASSWORD = "REYVELI2026";
+    const ADMIN_PASSWORD =
+      "REYVELI2026";
 
 
     function login() {
 
       const password =
-        document.getElementById("adminPassword").value;
+        document.getElementById(
+          "adminPassword"
+        ).value;
+
 
       const error =
-        document.getElementById("loginError");
+        document.getElementById(
+          "loginError"
+        );
+
 
       if (password === ADMIN_PASSWORD) {
 
-        sessionStorage.setItem("reyveliAdminLoggedIn", "true");
+        sessionStorage.setItem(
+          "reyveliAdminLoggedIn",
+          "true"
+        );
 
-        document.getElementById("loginScreen").style.display = "none";
-        document.getElementById("adminApp").style.display = "block";
 
-        document.getElementById("adminPassword").value = "";
+        document.getElementById(
+          "loginScreen"
+        ).style.display = "none";
+
+
+        document.getElementById(
+          "adminApp"
+        ).style.display = "block";
+
+
+        document.getElementById(
+          "adminPassword"
+        ).value = "";
+
+
         error.style.display = "none";
 
       } else {
 
         error.style.display = "block";
-        document.getElementById("adminPassword").value = "";
+
+
+        document.getElementById(
+          "adminPassword"
+        ).value = "";
 
       }
 
@@ -665,12 +1049,24 @@
 
     function logout() {
 
-      sessionStorage.removeItem("reyveliAdminLoggedIn");
+      sessionStorage.removeItem(
+        "reyveliAdminLoggedIn"
+      );
 
-      document.getElementById("adminApp").style.display = "none";
-      document.getElementById("loginScreen").style.display = "flex";
 
-      document.getElementById("adminPassword").value = "";
+      document.getElementById(
+        "adminApp"
+      ).style.display = "none";
+
+
+      document.getElementById(
+        "loginScreen"
+      ).style.display = "flex";
+
+
+      document.getElementById(
+        "adminPassword"
+      ).value = "";
 
     }
 
@@ -678,11 +1074,19 @@
     function checkLogin() {
 
       if (
-        sessionStorage.getItem("reyveliAdminLoggedIn") === "true"
+        sessionStorage.getItem(
+          "reyveliAdminLoggedIn"
+        ) === "true"
       ) {
 
-        document.getElementById("loginScreen").style.display = "none";
-        document.getElementById("adminApp").style.display = "block";
+        document.getElementById(
+          "loginScreen"
+        ).style.display = "none";
+
+
+        document.getElementById(
+          "adminApp"
+        ).style.display = "block";
 
       }
 
@@ -695,23 +1099,46 @@
 
     function showSection(section) {
 
-      document.querySelectorAll(".admin-section")
-        .forEach(item => item.classList.remove("active"));
+      document
+        .querySelectorAll(".admin-section")
+        .forEach(item =>
+          item.classList.remove("active")
+        );
 
-      document.getElementById(section)
+
+      document
+        .getElementById(section)
         .classList.add("active");
+
 
       window.scrollTo({
         top: 0,
         behavior: "smooth"
       });
 
-      if (section === "menu") renderAdminMenu();
-      if (section === "orders") renderAdminOrders();
-      if (section === "offers") loadOffer();
-      if (section === "homepage") loadHomepage();
-      if (section === "delivery") loadDelivery();
-      if (section === "settings") loadSettings();
+
+      if (section === "menu")
+        renderAdminMenu();
+
+
+      if (section === "orders")
+        renderAdminOrders();
+
+
+      if (section === "offers")
+        loadOffer();
+
+
+      if (section === "homepage")
+        loadHomepage();
+
+
+      if (section === "delivery")
+        loadDelivery();
+
+
+      if (section === "settings")
+        loadSettings();
 
     }
 
@@ -723,11 +1150,17 @@
     function getMenu() {
 
       try {
+
         return JSON.parse(
-          localStorage.getItem("reyveliAdminMenu")
+          localStorage.getItem(
+            "reyveliAdminMenu"
+          )
         ) || [];
+
       } catch {
+
         return [];
+
       }
 
     }
@@ -746,30 +1179,50 @@
     function addFood() {
 
       const name =
-        document.getElementById("foodName").value.trim();
+        document.getElementById(
+          "foodName"
+        ).value.trim();
+
 
       const price =
-        Number(document.getElementById("foodPrice").value);
+        Number(
+          document.getElementById(
+            "foodPrice"
+          ).value
+        );
+
 
       const category =
-        document.getElementById("foodCategory").value;
+        document.getElementById(
+          "foodCategory"
+        ).value;
+
 
       const description =
-        document.getElementById("foodDescription").value.trim();
+        document.getElementById(
+          "foodDescription"
+        ).value.trim();
+
 
       const image =
-        document.getElementById("foodImage").value.trim();
+        document.getElementById(
+          "foodImage"
+        ).value.trim();
 
 
       if (!name || price <= 0) {
 
-        alert("Please enter a food name and a price greater than 0.");
+        alert(
+          "Please enter a food name and a price greater than 0."
+        );
+
         return;
 
       }
 
 
-      const menu = getMenu();
+      const menu =
+        getMenu();
 
 
       menu.push({
@@ -794,25 +1247,46 @@
       saveMenu(menu);
 
 
-      document.getElementById("foodName").value = "";
-      document.getElementById("foodPrice").value = "";
-      document.getElementById("foodDescription").value = "";
-      document.getElementById("foodImage").value = "";
+      document.getElementById(
+        "foodName"
+      ).value = "";
+
+
+      document.getElementById(
+        "foodPrice"
+      ).value = "";
+
+
+      document.getElementById(
+        "foodDescription"
+      ).value = "";
+
+
+      document.getElementById(
+        "foodImage"
+      ).value = "";
 
 
       renderAdminMenu();
 
-      alert("Food added successfully!");
+
+      alert(
+        "Food added successfully!"
+      );
 
     }
 
 
     function renderAdminMenu() {
 
-      const menu = getMenu();
+      const menu =
+        getMenu();
+
 
       const container =
-        document.getElementById("adminMenuList");
+        document.getElementById(
+          "adminMenuList"
+        );
 
 
       if (menu.length === 0) {
@@ -825,131 +1299,260 @@
       }
 
 
-      container.innerHTML = menu.map(item => {
+      container.innerHTML =
+        menu.map(item => {
 
-        const visible =
-          item.visible !== false;
+          const visible =
+            item.visible !== false;
 
-        const imageHTML =
-          item.image
-            ? `<img class="food-preview" src="${escapeHTML(item.image)}" alt="${escapeHTML(item.name)}" onerror="this.style.display='none'">`
-            : "";
 
-        return `
+          const imageHTML =
+            item.image
+              ? `
+                <img
+                  class="food-preview"
+                  src="${escapeHTML(item.image)}"
+                  alt="${escapeHTML(item.name)}"
+                  onerror="this.style.display='none'"
+                >
+              `
+              : "";
 
-          <div class="admin-item ${visible ? "" : "hidden-food"}">
 
-            ${imageHTML}
+          return `
 
-            <strong>${escapeHTML(item.name)}</strong>
+            <div
+              class="admin-item
+              ${visible ? "" : "hidden-food"}"
+            >
 
-            <br>
+              ${imageHTML}
 
-            <strong>MVR ${escapeHTML(String(item.price))}</strong>
 
-            <br>
+              <strong>
+                ${escapeHTML(item.name)}
+              </strong>
 
-            Category:
-            ${escapeHTML(item.category)}
+              <br>
 
-            ${
-              item.description
-                ? `<br><br>${escapeHTML(item.description)}`
-                : ""
-            }
+              <strong>
+                MVR ${escapeHTML(
+                  String(item.price)
+                )}
+              </strong>
 
-            ${
-              visible
-                ? ""
-                : `<br><span class="hidden-label">HIDDEN FROM CUSTOMERS</span>`
-            }
+              <br>
 
-            <div class="food-actions">
+              Category:
+              ${escapeHTML(item.category)}
 
-              <button
-                class="admin-button small"
-                onclick="editFood(${item.id})">
-                ✏️ Edit
-              </button>
 
-              <button
-                class="admin-button small ${visible ? "gold" : ""}"
-                onclick="toggleFoodVisibility(${item.id})">
-                ${visible ? "👁️ Hide" : "👁️ Show"}
-              </button>
+              ${
+                item.description
+                  ? `
+                    <br><br>
+                    ${escapeHTML(
+                      item.description
+                    )}
+                  `
+                  : ""
+              }
 
-              <button
-                class="admin-button small danger"
-                onclick="deleteFood(${item.id})">
-                🗑️ Delete
-              </button>
 
-            </div>
+              ${
+                visible
+                  ? ""
+                  : `
+                    <br>
+                    <span class="hidden-label">
+                      HIDDEN FROM CUSTOMERS
+                    </span>
+                  `
+              }
 
-            <div id="edit-${item.id}" class="edit-box" style="display:none;">
-
-              <label>Food name</label>
-              <input
-                id="edit-name-${item.id}"
-                class="admin-input"
-                value="${escapeHTML(item.name)}">
-
-              <label>Price (MVR)</label>
-              <input
-                id="edit-price-${item.id}"
-                class="admin-input"
-                type="number"
-                min="0"
-                value="${escapeHTML(String(item.price))}">
-
-              <label>Category</label>
-              <select
-                id="edit-category-${item.id}"
-                class="admin-input">
-
-                <option value="burgers" ${item.category === "burgers" ? "selected" : ""}>Burgers</option>
-                <option value="meals" ${item.category === "meals" ? "selected" : ""}>Meals</option>
-                <option value="snacks" ${item.category === "snacks" ? "selected" : ""}>Snacks</option>
-                <option value="drinks" ${item.category === "drinks" ? "selected" : ""}>Drinks</option>
-                <option value="desserts" ${item.category === "desserts" ? "selected" : ""}>Desserts</option>
-
-              </select>
-
-              <label>Description</label>
-              <input
-                id="edit-description-${item.id}"
-                class="admin-input"
-                value="${escapeHTML(item.description || "")}">
-
-              <label>Image URL</label>
-              <input
-                id="edit-image-${item.id}"
-                class="admin-input"
-                value="${escapeHTML(item.image || "")}">
 
               <div class="food-actions">
 
                 <button
                   class="admin-button small"
-                  onclick="saveEditedFood(${item.id})">
-                  💾 Save Changes
+                  onclick="editFood(${item.id})"
+                >
+                  ✏️ Edit
                 </button>
 
+
                 <button
-                  class="admin-button small dark"
-                  onclick="cancelEdit(${item.id})">
-                  Cancel
+                  class="admin-button small
+                  ${visible ? "gold" : ""}"
+                  onclick="toggleFoodVisibility(${item.id})"
+                >
+                  ${visible ? "👁️ Hide" : "👁️ Show"}
                 </button>
+
+
+                <button
+                  class="admin-button small danger"
+                  onclick="deleteFood(${item.id})"
+                >
+                  🗑️ Delete
+                </button>
+
+              </div>
+
+
+              <div
+                id="edit-${item.id}"
+                class="edit-box"
+                style="display:none;"
+              >
+
+                <label>
+                  Food name
+                </label>
+
+                <input
+                  id="edit-name-${item.id}"
+                  class="admin-input"
+                  value="${escapeHTML(
+                    item.name
+                  )}"
+                >
+
+
+                <label>
+                  Price (MVR)
+                </label>
+
+                <input
+                  id="edit-price-${item.id}"
+                  class="admin-input"
+                  type="number"
+                  min="0"
+                  value="${escapeHTML(
+                    String(item.price)
+                  )}"
+                >
+
+
+                <label>
+                  Category
+                </label>
+
+                <select
+                  id="edit-category-${item.id}"
+                  class="admin-input"
+                >
+
+                  <option
+                    value="burgers"
+                    ${
+                      item.category === "burgers"
+                        ? "selected"
+                        : ""
+                    }
+                  >
+                    Burgers
+                  </option>
+
+                  <option
+                    value="meals"
+                    ${
+                      item.category === "meals"
+                        ? "selected"
+                        : ""
+                    }
+                  >
+                    Meals
+                  </option>
+
+                  <option
+                    value="snacks"
+                    ${
+                      item.category === "snacks"
+                        ? "selected"
+                        : ""
+                    }
+                  >
+                    Snacks
+                  </option>
+
+                  <option
+                    value="drinks"
+                    ${
+                      item.category === "drinks"
+                        ? "selected"
+                        : ""
+                    }
+                  >
+                    Drinks
+                  </option>
+
+                  <option
+                    value="desserts"
+                    ${
+                      item.category === "desserts"
+                        ? "selected"
+                        : ""
+                    }
+                  >
+                    Desserts
+                  </option>
+
+                </select>
+
+
+                <label>
+                  Description
+                </label>
+
+                <input
+                  id="edit-description-${item.id}"
+                  class="admin-input"
+                  value="${escapeHTML(
+                    item.description || ""
+                  )}"
+                >
+
+
+                <label>
+                  Image URL
+                </label>
+
+                <input
+                  id="edit-image-${item.id}"
+                  class="admin-input"
+                  value="${escapeHTML(
+                    item.image || ""
+                  )}"
+                >
+
+
+                <div class="food-actions">
+
+                  <button
+                    class="admin-button small"
+                    onclick="saveEditedFood(${item.id})"
+                  >
+                    💾 Save Changes
+                  </button>
+
+
+                  <button
+                    class="admin-button small dark"
+                    onclick="cancelEdit(${item.id})"
+                  >
+                    Cancel
+                  </button>
+
+                </div>
 
               </div>
 
             </div>
 
-          </div>
+          `;
 
-        `;
-
-      }).join("");
+        }).join("");
 
     }
 
@@ -957,9 +1560,13 @@
     function editFood(id) {
 
       const box =
-        document.getElementById("edit-" + id);
+        document.getElementById(
+          "edit-" + id
+        );
+
 
       if (!box) return;
+
 
       box.style.display =
         box.style.display === "none"
@@ -972,10 +1579,16 @@
     function cancelEdit(id) {
 
       const box =
-        document.getElementById("edit-" + id);
+        document.getElementById(
+          "edit-" + id
+        );
+
 
       if (box) {
-        box.style.display = "none";
+
+        box.style.display =
+          "none";
+
       }
 
     }
@@ -983,59 +1596,105 @@
 
     function saveEditedFood(id) {
 
-      const menu = getMenu();
+      const menu =
+        getMenu();
+
 
       const item =
-        menu.find(food => food.id === id);
+        menu.find(
+          food => food.id === id
+        );
+
 
       if (!item) return;
 
 
       const name =
-        document.getElementById("edit-name-" + id).value.trim();
+        document.getElementById(
+          "edit-name-" + id
+        ).value.trim();
+
 
       const price =
-        Number(document.getElementById("edit-price-" + id).value);
+        Number(
+          document.getElementById(
+            "edit-price-" + id
+          ).value
+        );
+
 
       const category =
-        document.getElementById("edit-category-" + id).value;
+        document.getElementById(
+          "edit-category-" + id
+        ).value;
+
 
       const description =
-        document.getElementById("edit-description-" + id).value.trim();
+        document.getElementById(
+          "edit-description-" + id
+        ).value.trim();
+
 
       const image =
-        document.getElementById("edit-image-" + id).value.trim();
+        document.getElementById(
+          "edit-image-" + id
+        ).value.trim();
 
 
       if (!name || price <= 0) {
 
-        alert("Please enter a food name and a valid price.");
+        alert(
+          "Please enter a food name and a valid price."
+        );
+
         return;
 
       }
 
 
-      item.name = name;
-      item.price = price;
-      item.category = category;
-      item.description = description;
-      item.image = image;
+      item.name =
+        name;
+
+
+      item.price =
+        price;
+
+
+      item.category =
+        category;
+
+
+      item.description =
+        description;
+
+
+      item.image =
+        image;
 
 
       saveMenu(menu);
+
       renderAdminMenu();
 
-      alert("Food updated successfully!");
+
+      alert(
+        "Food updated successfully!"
+      );
 
     }
 
 
     function toggleFoodVisibility(id) {
 
-      const menu = getMenu();
+      const menu =
+        getMenu();
+
 
       const item =
-        menu.find(food => food.id === id);
+        menu.find(
+          food => food.id === id
+        );
+
 
       if (!item) return;
 
@@ -1047,6 +1706,7 @@
 
 
       saveMenu(menu);
+
       renderAdminMenu();
 
     }
@@ -1054,15 +1714,25 @@
 
     function deleteFood(id) {
 
-      if (!confirm("Delete this food permanently?")) {
+      if (
+        !confirm(
+          "Delete this food permanently?"
+        )
+      ) {
+
         return;
+
       }
 
 
-      let menu = getMenu();
+      let menu =
+        getMenu();
+
 
       menu =
-        menu.filter(item => item.id !== id);
+        menu.filter(
+          item => item.id !== id
+        );
 
 
       saveMenu(menu);
@@ -1076,78 +1746,482 @@
        ORDERS
        ========================= */
 
-    function renderAdminOrders() {
-
-      let orders = [];
+    function getOrders() {
 
       try {
-        orders =
-          JSON.parse(
-            localStorage.getItem("reyveliOrders")
-          ) || [];
+
+        return JSON.parse(
+          localStorage.getItem(
+            "reyveliOrders"
+          )
+        ) || [];
+
       } catch {
-        orders = [];
+
+        return [];
+
       }
 
+    }
 
-      document.getElementById("orderCount")
-        .textContent = orders.length;
+
+    function saveOrders(orders) {
+
+      localStorage.setItem(
+        "reyveliOrders",
+        JSON.stringify(orders)
+      );
+
+    }
+
+
+    function renderAdminOrders() {
+
+      let orders =
+        getOrders();
+
+
+      const count =
+        document.getElementById(
+          "orderCount"
+        );
 
 
       const container =
-        document.getElementById("adminOrders");
+        document.getElementById(
+          "adminOrders"
+        );
+
+
+      /*
+         Newest orders first
+      */
+
+      orders =
+        orders.slice().reverse();
+
+
+      count.textContent =
+        orders.length;
 
 
       if (orders.length === 0) {
 
-        container.innerHTML =
-          "<p>No orders yet.</p>";
+        container.innerHTML = `
+
+          <div class="no-orders">
+
+            📦
+
+            <br><br>
+
+            No orders yet.
+
+            <br>
+
+            Customer orders will appear here.
+
+          </div>
+
+        `;
 
         return;
 
       }
 
 
-      container.innerHTML = orders.map(order => `
+      container.innerHTML =
+        orders.map(order => {
 
-        <div class="admin-item">
+          const items =
+            Array.isArray(order.items)
+              ? order.items
+              : [];
 
-          <strong>
-            Order ${escapeHTML(String(order.id || ""))}
-          </strong>
 
-          <br><br>
+          const status =
+            order.status || "New";
 
-          Customer:
-          ${escapeHTML(order.customer?.name || "")}
 
-          <br>
+          const statusClass =
+            getStatusClass(status);
 
-          Phone:
-          ${escapeHTML(order.customer?.phone || "")}
 
-          <br>
+          return `
 
-          Location:
-          ${escapeHTML(order.customer?.location || "")}
+            <div class="order-card">
 
-          <br><br>
+              <div class="order-top">
 
-          Total:
-          <strong>
-            MVR ${escapeHTML(String(order.total || 0))}
-          </strong>
+                <div>
 
-          <br><br>
+                  <div class="order-number">
 
-          Status:
-          <strong>
-            ${escapeHTML(order.status || "")}
-          </strong>
+                    Order
+                    ${escapeHTML(
+                      String(
+                        order.id || ""
+                      )
+                    )}
 
-        </div>
+                  </div>
 
-      `).join("");
+
+                  <div class="order-date">
+
+                    ${escapeHTML(
+                      String(
+                        order.date || ""
+                      )
+                    )}
+
+                  </div>
+
+                </div>
+
+
+                <span
+                  class="order-status ${statusClass}"
+                >
+                  ${escapeHTML(status)}
+                </span>
+
+              </div>
+
+
+              <div class="order-info">
+
+                <strong>
+                  👤 Customer
+                </strong>
+
+                <br>
+
+                ${escapeHTML(
+                  order.customer?.name || ""
+                )}
+
+                <br><br>
+
+
+                <strong>
+                  📞 Phone
+                </strong>
+
+                <br>
+
+                ${escapeHTML(
+                  order.customer?.phone || ""
+                )}
+
+                <br><br>
+
+
+                <strong>
+                  📍 Delivery location
+                </strong>
+
+                <br>
+
+                ${escapeHTML(
+                  order.customer?.location || ""
+                )}
+
+                <br><br>
+
+
+                <strong>
+                  💳 Payment
+                </strong>
+
+                <br>
+
+                ${formatPayment(
+                  order.payment
+                )}
+
+              </div>
+
+
+              <div class="order-items">
+
+                <div class="order-items-title">
+                  🍔 ORDER ITEMS
+                </div>
+
+
+                ${
+                  items.length
+                    ? items.map(item => `
+
+                        <div
+                          class="order-item-row"
+                        >
+
+                          <span>
+
+                            ${escapeHTML(
+                              item.name || ""
+                            )}
+
+                            ×
+                            ${escapeHTML(
+                              String(
+                                item.quantity || 1
+                              )
+                            )}
+
+                          </span>
+
+
+                          <strong>
+
+                            MVR
+                            ${escapeHTML(
+                              String(
+                                (
+                                  Number(item.price) *
+                                  Number(item.quantity || 1)
+                                )
+                              )
+                            )}
+
+                          </strong>
+
+                        </div>
+
+                      `).join("")
+                    : `
+                      <div class="order-item-row">
+                        No item details available.
+                      </div>
+                    `
+                }
+
+
+                <div class="order-total">
+
+                  <span>
+                    Total
+                  </span>
+
+                  <span>
+                    MVR
+                    ${escapeHTML(
+                      String(
+                        order.total || 0
+                      )
+                    )}
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              ${
+                order.notes
+                  ? `
+                    <div class="order-notes">
+
+                      <strong>
+                        📝 Customer note
+                      </strong>
+
+                      <br><br>
+
+                      ${escapeHTML(
+                        order.notes
+                      )}
+
+                    </div>
+                  `
+                  : ""
+              }
+
+
+              <div class="order-actions">
+
+                <select
+                  onchange="changeOrderStatus('${escapeHTML(String(order.id || ""))}', this.value)"
+                >
+
+                  <option
+                    value="New"
+                    ${status === "New" ? "selected" : ""}
+                  >
+                    🆕 New
+                  </option>
+
+                  <option
+                    value="Accepted"
+                    ${status === "Accepted" ? "selected" : ""}
+                  >
+                    ✅ Accepted
+                  </option>
+
+                  <option
+                    value="Preparing"
+                    ${status === "Preparing" ? "selected" : ""}
+                  >
+                    🍳 Preparing
+                  </option>
+
+                  <option
+                    value="Out for delivery"
+                    ${status === "Out for delivery" ? "selected" : ""}
+                  >
+                    🛵 Out for delivery
+                  </option>
+
+                  <option
+                    value="Completed"
+                    ${status === "Completed" ? "selected" : ""}
+                  >
+                    ✔️ Completed
+                  </option>
+
+                  <option
+                    value="Cancelled"
+                    ${status === "Cancelled" ? "selected" : ""}
+                  >
+                    ❌ Cancelled
+                  </option>
+
+                </select>
+
+
+                <button
+                  class="admin-button small danger"
+                  onclick="deleteOrder('${escapeHTML(String(order.id || ""))}')"
+                >
+                  🗑️ Delete
+                </button>
+
+              </div>
+
+            </div>
+
+          `;
+
+        }).join("");
+
+    }
+
+
+    function getStatusClass(status) {
+
+      const value =
+        String(status)
+          .toLowerCase();
+
+
+      if (value === "new")
+        return "new";
+
+
+      if (value === "accepted")
+        return "accepted";
+
+
+      if (value === "preparing")
+        return "preparing";
+
+
+      if (
+        value === "out for delivery"
+      )
+        return "delivery";
+
+
+      if (value === "completed")
+        return "completed";
+
+
+      if (value === "cancelled")
+        return "cancelled";
+
+
+      return "";
+
+    }
+
+
+    function formatPayment(payment) {
+
+      if (
+        payment === "transfer"
+      ) {
+
+        return "🏦 Bank / online transfer";
+
+      }
+
+
+      return "💵 Cash on delivery";
+
+    }
+
+
+    function changeOrderStatus(
+      orderId,
+      newStatus
+    ) {
+
+      const orders =
+        getOrders();
+
+
+      const order =
+        orders.find(
+          item =>
+            String(item.id) ===
+            String(orderId)
+        );
+
+
+      if (!order) return;
+
+
+      order.status =
+        newStatus;
+
+
+      saveOrders(orders);
+
+      renderAdminOrders();
+
+    }
+
+
+    function deleteOrder(orderId) {
+
+      if (
+        !confirm(
+          "Delete this order permanently?"
+        )
+      ) {
+
+        return;
+
+      }
+
+
+      let orders =
+        getOrders();
+
+
+      orders =
+        orders.filter(
+          order =>
+            String(order.id) !==
+            String(orderId)
+        );
+
+
+      saveOrders(orders);
+
+      renderAdminOrders();
 
     }
 
@@ -1159,22 +2233,34 @@
     function saveOffer() {
 
       const title =
-        document.getElementById("offerTitle").value.trim();
+        document.getElementById(
+          "offerTitle"
+        ).value.trim();
+
 
       const discount =
-        document.getElementById("offerDiscount").value.trim();
+        document.getElementById(
+          "offerDiscount"
+        ).value.trim();
 
 
       localStorage.setItem(
         "reyveliOffer",
         JSON.stringify({
-          title: title,
-          discount: discount
+
+          title:
+            title,
+
+          discount:
+            discount
+
         })
       );
 
 
-      alert("Offer saved!");
+      alert(
+        "Offer saved!"
+      );
 
     }
 
@@ -1183,20 +2269,32 @@
 
       let offer = {};
 
+
       try {
+
         offer =
           JSON.parse(
-            localStorage.getItem("reyveliOffer")
+            localStorage.getItem(
+              "reyveliOffer"
+            )
           ) || {};
+
       } catch {
+
         offer = {};
+
       }
 
 
-      document.getElementById("offerTitle").value =
+      document.getElementById(
+        "offerTitle"
+      ).value =
         offer.title || "";
 
-      document.getElementById("offerDiscount").value =
+
+      document.getElementById(
+        "offerDiscount"
+      ).value =
         offer.discount || "";
 
     }
@@ -1211,13 +2309,19 @@
       const data = {
 
         headline:
-          document.getElementById("homepageHeadline").value,
+          document.getElementById(
+            "homepageHeadline"
+          ).value,
 
         banner:
-          document.getElementById("homepageBanner").value,
+          document.getElementById(
+            "homepageBanner"
+          ).value,
 
         announcement:
-          document.getElementById("homepageAnnouncement").value
+          document.getElementById(
+            "homepageAnnouncement"
+          ).value
 
       };
 
@@ -1228,7 +2332,9 @@
       );
 
 
-      alert("Homepage settings saved!");
+      alert(
+        "Homepage settings saved!"
+      );
 
     }
 
@@ -1237,29 +2343,50 @@
 
       let data = {};
 
+
       try {
+
         data =
           JSON.parse(
-            localStorage.getItem("reyveliHomepage")
+            localStorage.getItem(
+              "reyveliHomepage"
+            )
           ) || {};
+
       } catch {
+
         data = {};
+
       }
 
 
       if (data.headline) {
-        document.getElementById("homepageHeadline").value =
+
+        document.getElementById(
+          "homepageHeadline"
+        ).value =
           data.headline;
+
       }
+
 
       if (data.banner) {
-        document.getElementById("homepageBanner").value =
+
+        document.getElementById(
+          "homepageBanner"
+        ).value =
           data.banner;
+
       }
 
+
       if (data.announcement) {
-        document.getElementById("homepageAnnouncement").value =
+
+        document.getElementById(
+          "homepageAnnouncement"
+        ).value =
           data.announcement;
+
       }
 
     }
@@ -1275,15 +2402,21 @@
 
         fee:
           Number(
-            document.getElementById("deliveryFee").value
+            document.getElementById(
+              "deliveryFee"
+            ).value
           ) || 0,
 
         areas:
-          document.getElementById("deliveryAreas").value,
+          document.getElementById(
+            "deliveryAreas"
+          ).value,
 
         minimum:
           Number(
-            document.getElementById("minimumOrder").value
+            document.getElementById(
+              "minimumOrder"
+            ).value
           ) || 0
 
       };
@@ -1295,7 +2428,9 @@
       );
 
 
-      alert("Delivery settings saved!");
+      alert(
+        "Delivery settings saved!"
+      );
 
     }
 
@@ -1304,29 +2439,56 @@
 
       let data = {};
 
+
       try {
+
         data =
           JSON.parse(
-            localStorage.getItem("reyveliDelivery")
+            localStorage.getItem(
+              "reyveliDelivery"
+            )
           ) || {};
+
       } catch {
+
         data = {};
+
       }
 
 
-      if (data.fee !== undefined) {
-        document.getElementById("deliveryFee").value =
+      if (
+        data.fee !== undefined
+      ) {
+
+        document.getElementById(
+          "deliveryFee"
+        ).value =
           data.fee;
+
       }
 
-      if (data.areas !== undefined) {
-        document.getElementById("deliveryAreas").value =
+
+      if (
+        data.areas !== undefined
+      ) {
+
+        document.getElementById(
+          "deliveryAreas"
+        ).value =
           data.areas;
+
       }
 
-      if (data.minimum !== undefined) {
-        document.getElementById("minimumOrder").value =
+
+      if (
+        data.minimum !== undefined
+      ) {
+
+        document.getElementById(
+          "minimumOrder"
+        ).value =
           data.minimum;
+
       }
 
     }
@@ -1341,13 +2503,19 @@
       const data = {
 
         name:
-          document.getElementById("businessName").value,
+          document.getElementById(
+            "businessName"
+          ).value,
 
         tagline:
-          document.getElementById("businessTagline").value,
+          document.getElementById(
+            "businessTagline"
+          ).value,
 
         status:
-          document.getElementById("businessStatus").value
+          document.getElementById(
+            "businessStatus"
+          ).value
 
       };
 
@@ -1358,7 +2526,9 @@
       );
 
 
-      alert("Business settings saved!");
+      alert(
+        "Settings saved!"
+      );
 
     }
 
@@ -1367,29 +2537,50 @@
 
       let data = {};
 
+
       try {
+
         data =
           JSON.parse(
-            localStorage.getItem("reyveliSettings")
+            localStorage.getItem(
+              "reyveliSettings"
+            )
           ) || {};
+
       } catch {
+
         data = {};
+
       }
 
 
       if (data.name) {
-        document.getElementById("businessName").value =
+
+        document.getElementById(
+          "businessName"
+        ).value =
           data.name;
+
       }
+
 
       if (data.tagline) {
-        document.getElementById("businessTagline").value =
+
+        document.getElementById(
+          "businessTagline"
+        ).value =
           data.tagline;
+
       }
 
+
       if (data.status) {
-        document.getElementById("businessStatus").value =
+
+        document.getElementById(
+          "businessStatus"
+        ).value =
           data.status;
+
       }
 
     }
@@ -1402,11 +2593,31 @@
     function escapeHTML(value) {
 
       return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+
+        .replace(
+          /</g,
+          "&lt;"
+        )
+
+        .replace(
+          />/g,
+          "&gt;"
+        )
+
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+
+        .replace(
+          /'/g,
+          "&#039;"
+        );
 
     }
 
